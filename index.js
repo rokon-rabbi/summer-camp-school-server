@@ -41,6 +41,7 @@ async function run() {
 
   const usersClasses = client.db("summerCamp").collection("classes");
   const usersCollection = client.db("summerCamp").collection("users");
+  const cartCollection = client.db("summerCamp").collection("carts");
   
   app.get('/classes', async (req, res) => {
     const result = await usersClasses.find().toArray();
@@ -73,6 +74,12 @@ app.post('/users', async (req, res) => {
     const result = await usersCollection.find().toArray();
     res.send(result);
   });
+  // post card data 
+  app.post('/carts', async (req, res) => {
+    const item = req.body;
+    const result = await cartCollection.insertOne(item);
+    res.send(result);
+  })
 
  
 
