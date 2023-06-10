@@ -21,6 +21,14 @@ const client = new MongoClient(uri, {
 });
 
 async function run() {
+
+  const usersClasses = client.db("summerCamp").collection("classes");
+  app.get('/classes', async (req, res) => {
+    const result = await usersClasses.find().toArray();
+    res.send(result);
+  });
+
+
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();

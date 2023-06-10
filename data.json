@@ -1,0 +1,121 @@
+ [
+    {
+        "image": "https://media.istockphoto.com/id/1272269793/photo/silhouette-action-sport.jpg?s=612x612&w=0&k=20&c=aah2jzqNEtOBlZEBVLnMDEHUmWzKSE8VgyBb5wOHzPI=",
+        "name": "Soccer",
+        "instructor": "John Smith",
+        "availableSeats": 20,
+        "price": 50,
+        "selectButton": "Select",
+        "studentsEnrolled": 18
+      },
+      {
+        "image": "https://assets.website-files.com/6017532caade42026f82f35a/601cfa74771ae8d9ecb5ca1f_School-Program-Image.jpg",
+        "name": "Basketball",
+        "instructor": "Sarah Johnson",
+        "availableSeats": 15,
+        "price": 60,
+        "selectButton": "Select",
+        "studentsEnrolled": 12
+      },
+      {
+        "image": "https://media.istockphoto.com/id/544595788/photo/tennis-is-fun-when-father-is-near.jpg?s=612x612&w=0&k=20&c=zgj3Mnj0_YT0y9lOHYX52QAifUaPKgITSMJ-GdFn81g=",
+        "name": "Tennis",
+        "instructor": "Michael Davis",
+        "availableSeats": 10,
+        "price": 70,
+        "selectButton": "Select",
+        "studentsEnrolled": 8
+      },
+      {
+        "image": "https://www.shutterstock.com/image-photo/girl-playing-volleyball-child-hits-260nw-2089646509.jpg",
+        "name": "Volleyball",
+        "instructor": "Emily Wilson",
+        "availableSeats": 12,
+        "price": 55,
+        "selectButton": "Select",
+        "studentsEnrolled": 10
+      },
+      {
+        "image": "https://images.squarespace-cdn.com/content/v1/5846d83af5e231d83261c3d5/1559124707433-GZAJMJGLY09YUZRDZNV7/shutterstock_301189598.jpg",
+        "name": "Swimming",
+        "instructor": "David Thompson",
+        "availableSeats": 18,
+        "price": 65,
+        "selectButton": "Select",
+        "studentsEnrolled": 16
+      },
+      {
+        "image": "https://goldmedalgyms.com/wp-content/uploads/2019/06/Children-flexing-on-gymnastics-mats.jpg",
+        "name": "Gymnastics",
+        "instructor": "Olivia Roberts",
+        "availableSeats": 8,
+        "price": 75,
+        "selectButton": "Select",
+        "studentsEnrolled": 6
+      },
+      {
+        "image": "https://www.briarwooddaycamp.com/wp-content/uploads/2019/11/briarwood-archery.jpeg",
+        "name": "Archery",
+        "instructor": "Sophia Turner",
+        "availableSeats": 10,
+        "price": 60,
+        "selectButton": "Select",
+        "studentsEnrolled": 9
+      },
+
+    {
+      "image": "https://shop.australiansportscamps.com.au/wp-content/uploads/2016/11/kids-cricket-sports-camp.jpg",
+      "name": "Cricket",
+      "instructor": "Matthew Harris",
+      "availableSeats": 15,
+      "price": 50,
+      "selectButton": "Select",
+      "studentsEnrolled": 19
+    },
+    {
+      "image": "https://www.germantownacademy.net/uploaded/photos/Summer_Programs/Sports_Headers/FHR.jpg",
+      "name": "Field Hockey",
+      "instructor": "Emma Anderson",
+      "availableSeats": 12,
+      "price": 70,
+      "selectButton": "Select",
+      "studentsEnrolled": 21
+    },
+    {
+      "image": "https://www.ussportscamps.com/media/images/lacrosse/nike/_1024x600_crop_center-center_100_none/nike-boys-lacrosse-camps.jpg",
+      "name": "Lacrosse",
+      "instructor": "William Martinez",
+      "availableSeats": 10,
+      "price": 75,
+      "selectButton": "Select",
+      "studentsEnrolled": 17
+    },
+    {
+      "image": "https://d2cx26qpfwuhvu.cloudfront.net/leinster/wp-content/uploads/2021/04/19120511/1916286-1.jpg",
+      "name": "Rugby",
+      "instructor": "Isabella Adams",
+      "availableSeats": 15,
+      "price": 55,
+      "selectButton": "Select",
+      "studentsEnrolled": 11
+    },
+    {
+      "image": "https://static.bangkokpost.com/media/content/20130820/533081.jpg",
+      "name": "Badminton",
+      "instructor": "Ethan Hughes",
+      "availableSeats": 8,
+      "price": 65,
+      "selectButton": "Select",
+      "studentsEnrolled": 15
+    },
+    {
+      "image": "https://better.net/chicago/wp-content/uploads/sites/2/2015/01/equestrian-camps-for-kids.jpg",
+      "name": "Horseback Riding",
+      "instructor": "Sophie Johnson",
+      "availableSeats": 0,
+      "price": 90,
+      "selectButton": "Select",
+      "studentsEnrolled": 13
+    }
+  ]
+
