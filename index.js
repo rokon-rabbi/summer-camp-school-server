@@ -23,11 +23,24 @@ const client = new MongoClient(uri, {
 async function run() {
 
   const usersClasses = client.db("summerCamp").collection("classes");
+  const usersCollection = client.db("summerCamp").collection("users");
   app.get('/classes', async (req, res) => {
     const result = await usersClasses.find().toArray();
     res.send(result);
   });
+//  store users 
+app.post('/users', async (req, res) => {
+  const user = req.body;
+  const query = { email: user.email }
+  const existingUser = await usersCollection.findOne(query);
 
+  if (existingUser) {
+    return res.send({ message: 'user already exists' })
+  }
+
+  const result = await usersCollection.insertOne(user);
+  res.send(result);
+});
 
   try {
     // Connect the client to the server	(optional starting in v4.7)
