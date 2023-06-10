@@ -41,6 +41,7 @@ async function run() {
 
   const usersClasses = client.db("summerCamp").collection("classes");
   const usersCollection = client.db("summerCamp").collection("users");
+  
   app.get('/classes', async (req, res) => {
     const result = await usersClasses.find().toArray();
     res.send(result);
@@ -66,6 +67,14 @@ app.post('/users', async (req, res) => {
   const result = await usersCollection.insertOne(user);
   res.send(result);
 });
+
+// get users 
+  app.get('/users',  async (req, res) => {
+    const result = await usersCollection.find().toArray();
+    res.send(result);
+  });
+
+ 
 
   try {
     // Connect the client to the server	(optional starting in v4.7)
