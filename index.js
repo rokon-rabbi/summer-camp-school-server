@@ -83,7 +83,7 @@ app.post('/users', async (req, res) => {
   // cart collection apis
   app.get('/carts', verifyJWT, async (req, res) => {
     const email = req.query.email;
-
+    
     if (!email) {
       res.send([]);
     }
@@ -97,7 +97,36 @@ app.post('/users', async (req, res) => {
     const result = await cartCollection.find(query).toArray();
     res.send(result);
   });
- 
+  // role check 
+
+   app.get('/users/role/:email', verifyJWT, async (req, res) => {
+      const email = req.params.email;
+      
+
+      if (req.decoded.email !== email) {
+        return res.status(403).send({ error: true, message: 'forbidden access' })
+      }
+
+      const query = { email: email }
+      const user = await usersCollection.findOne(query);
+      // let result;
+      // if( user?.role === 'admin'){
+        
+      //   result = { admin: user?.role === 'admin' }
+      // }
+      // else if( user?.role === 'user'){
+      //    console.log(user);
+      //   result = { user: user?.role === 'user' }
+      // }
+      // else  if( user?.role === 'instructor'){
+      //   result = { instructor: user?.role === 'instructor' }
+      // }
+      // else{
+      // result= "unknown";
+      // }
+     
+      res.send(user);
+    })
 
   try {
     // Connect the client to the server	(optional starting in v4.7)
