@@ -99,6 +99,34 @@ async function run() {
     const result = await usersCollection.find().toArray();
     res.send(result);
   });
+  // role update
+  // update status by admin
+  app.patch("/users/:id", verifyJWT, async (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    const { status } = req.body;
+    const filter = { _id: new ObjectId(id) };
+
+    // const query = { email: user.email };
+    // const classItem = await usersClasses.findOne(filter);
+
+    let newStatus;
+    if (status === "admin") {
+      newStatus = "admin";
+    } else if (status === "instructor") {
+      newStatus = "instructor";
+    } else {
+      // Handle other status values if needed
+    }
+    const updateDoc = {
+      $set: {
+        role: newStatus,
+      },
+    };
+
+    const result = await usersCollection.updateOne(filter, updateDoc);
+    res.send(result);
+  });
   // post card data
   app.post("/carts", async (req, res) => {
     const item = req.body;
@@ -158,36 +186,33 @@ async function run() {
     const result = await cartCollection.deleteOne(query);
     res.send(result);
   });
-  // update status by admin 
-  app.patch('/classes/:id', async (req, res) => {
+  // update status by admin
+  app.patch("/classes/:id", async (req, res) => {
     const id = req.params.id;
     console.log(id);
     const { status } = req.body;
     const filter = { _id: new ObjectId(id) };
-    
-  // const query = { email: user.email };
-  // const classItem = await usersClasses.findOne(filter);
-    
-  let newStatus;
-  if (status === 'approved') {
-    newStatus = 'approved';
-  } else if (status === 'denied') {
-    newStatus = 'denied';
-  } else {
-    // Handle other status values if needed
-  }
+
+    // const query = { email: user.email };
+    // const classItem = await usersClasses.findOne(filter);
+
+    let newStatus;
+    if (status === "approved") {
+      newStatus = "approved";
+    } else if (status === "denied") {
+      newStatus = "denied";
+    } else {
+      // Handle other status values if needed
+    }
     const updateDoc = {
       $set: {
-        
-        status:newStatus
+        status: newStatus,
       },
     };
 
     const result = await usersClasses.updateOne(filter, updateDoc);
     res.send(result);
-
-  })
-
+  });
 
   try {
     // Connect the client to the server	(optional starting in v4.7)
