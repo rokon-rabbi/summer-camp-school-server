@@ -127,7 +127,13 @@ app.post('/users', async (req, res) => {
      
       res.send(user);
     })
-
+    // delete cart items 
+    app.delete('/carts/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await cartCollection.deleteOne(query);
+      res.send(result);
+    })
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
