@@ -158,6 +158,37 @@ async function run() {
     const result = await cartCollection.deleteOne(query);
     res.send(result);
   });
+  // update status by admin 
+  app.patch('/classes/:id', async (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    const { status } = req.body;
+    const filter = { _id: new ObjectId(id) };
+    
+  // const query = { email: user.email };
+  // const classItem = await usersClasses.findOne(filter);
+    
+  let newStatus;
+  if (status === 'approved') {
+    newStatus = 'approved';
+  } else if (status === 'denied') {
+    newStatus = 'denied';
+  } else {
+    // Handle other status values if needed
+  }
+    const updateDoc = {
+      $set: {
+        
+        status:newStatus
+      },
+    };
+
+    const result = await usersClasses.updateOne(filter, updateDoc);
+    res.send(result);
+
+  })
+
+
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
