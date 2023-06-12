@@ -1,11 +1,17 @@
+require("dotenv").config();
+const stripe = require("stripe")(`${process.env.PAYMENT_SECRET_KEY}`);
 const express = require("express");
-const jwt = require("jsonwebtoken");
-const port = process.env.PORT || 5000;
 const app = express();
 const cors = require("cors");
-require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const port = process.env.PORT || 5000;
 // middleware
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const verifyJWT = (req, res, next) => {
@@ -45,6 +51,7 @@ async function run() {
   const usersClasses = client.db("summerCamp").collection("classes");
   const usersCollection = client.db("summerCamp").collection("users");
   const cartCollection = client.db("summerCamp").collection("carts");
+  const paymentCollection = client.db("summerCamp").collection("payments");
 
   app.get("/classes", async (req, res) => {
     const result = await usersClasses.find().toArray();
@@ -135,18 +142,18 @@ async function run() {
   });
   // cart collection apis
   app.get("/carts", verifyJWT, async (req, res) => {
-    const email = req.query.email;
+    const instructorEmail = req.query.email;
 
-    if (!email) {
+    if (!instructorEmail) {
       res.send([]);
     }
 
     const decodedEmail = req.decoded.email;
-    if (email !== decodedEmail) {
+    if (instructorEmail !== decodedEmail) {
       return res.status(403).send({ error: true, message: "forbidden access" });
     }
 
-    const query = { email: email };
+    const query = { instructorEmail: instructorEmail };
     const result = await cartCollection.find(query).toArray();
     res.send(result);
   });
@@ -209,9 +216,33 @@ async function run() {
         status: newStatus,
       },
     };
+    // payment related api
+    app.post("/payments", verifyJWT, async (req, res) => {
+      const payment = req.body;
+      const insertResult = await paymentCollection.insertOne(payment);
 
-    const result = await usersClasses.updateOne(filter, updateDoc);
-    res.send(result);
+      const query = {
+        _id: { $in: payment.cartItems.map(id => new ObjectId(id)) },
+      };
+      const deleteResult = await cartCollection.deleteMany(query);
+
+      res.send({ insertResult });
+    });
+    // create payment intent
+    app.post("/create-payment-intent", verifyJWT, async (req, res) => {
+      const { price } = req.body;
+      const amount = parseFloat(price) * 100;
+      if (!price) return;
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: amount,
+        currency: "usd",
+        payment_method_types: ["card"],
+      });
+
+      res.send({
+        clientSecret: paymentIntent.client_secret,
+      });
+    });
   });
 
   try {
